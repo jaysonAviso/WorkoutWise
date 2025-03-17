@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutWise.API", "WorkoutWise.API\WorkoutWise.API.csproj", "{436CD2C9-67B8-4941-86AE-F421E7318E09}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutWise.Application", "..\WorkoutWise.Application\WorkoutWise.Application.csproj", "{A1D70EAD-8ECA-4417-A59E-407EDF88BC3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutWise.Domain", "..\WorkoutWise.Domain\WorkoutWise.Domain.csproj", "{5287561E-9E13-43C6-BF35-D55B4EC08AD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F26C792B-8049-4A7F-96CF-4750D5BA4FDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutWise.Infrastructure", "..\WorkoutWise.Infrastructure\WorkoutWise.Infrastructure.csproj", "{5B371BCA-0801-404C-A6EA-3588A1B854B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{CA69C654-7A08-45FE-8B29-6A47B7224AD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API.Tests", "API.Tests", "{D057AE9E-FCF0-4B4E-8275-7B450A9116E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{436CD2C9-67B8-4941-86AE-F421E7318E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{436CD2C9-67B8-4941-86AE-F421E7318E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{436CD2C9-67B8-4941-86AE-F421E7318E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{436CD2C9-67B8-4941-86AE-F421E7318E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1D70EAD-8ECA-4417-A59E-407EDF88BC3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1D70EAD-8ECA-4417-A59E-407EDF88BC3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1D70EAD-8ECA-4417-A59E-407EDF88BC3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1D70EAD-8ECA-4417-A59E-407EDF88BC3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5287561E-9E13-43C6-BF35-D55B4EC08AD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5287561E-9E13-43C6-BF35-D55B4EC08AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5287561E-9E13-43C6-BF35-D55B4EC08AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5287561E-9E13-43C6-BF35-D55B4EC08AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B371BCA-0801-404C-A6EA-3588A1B854B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B371BCA-0801-404C-A6EA-3588A1B854B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B371BCA-0801-404C-A6EA-3588A1B854B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B371BCA-0801-404C-A6EA-3588A1B854B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{436CD2C9-67B8-4941-86AE-F421E7318E09} = {F26C792B-8049-4A7F-96CF-4750D5BA4FDF}
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A} = {F26C792B-8049-4A7F-96CF-4750D5BA4FDF}
+		{A1D70EAD-8ECA-4417-A59E-407EDF88BC3F} = {F26C792B-8049-4A7F-96CF-4750D5BA4FDF}
+		{5287561E-9E13-43C6-BF35-D55B4EC08AD3} = {F26C792B-8049-4A7F-96CF-4750D5BA4FDF}
+		{5B371BCA-0801-404C-A6EA-3588A1B854B4} = {F26C792B-8049-4A7F-96CF-4750D5BA4FDF}
+		{D057AE9E-FCF0-4B4E-8275-7B450A9116E4} = {CA69C654-7A08-45FE-8B29-6A47B7224AD8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DB7CD1C0-C369-4A13-BD34-6C37DC9370FF}
+	EndGlobalSection
+EndGlobal
