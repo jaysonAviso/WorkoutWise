@@ -13,6 +13,7 @@ using System.Data;
 using Microsoft.EntityFrameworkCore.Storage;
 using WorkoutWise.Domain.Aggregates.Workouts.Entities;
 using WorkoutWise.Domain.Aggregates.WorkoutPlan.Entities;
+using WorkoutWise.Domain.Aggregates.UserAcount.Entities;
 
 namespace WorkoutWise.Infrastructure.Persistence
 {
@@ -28,6 +29,7 @@ namespace WorkoutWise.Infrastructure.Persistence
         public DbSet<Workout> workouts { get; set; }
         public DbSet<WorkoutExercise> workoutsExercise { get; set; }
         public DbSet<ExerciseSet> workoutsSet { get; set; }
+        public DbSet<User> users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
