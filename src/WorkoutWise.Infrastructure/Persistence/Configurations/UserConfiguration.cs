@@ -35,8 +35,14 @@ namespace WorkoutWise.Infrastructure.Persistence.Configurations
             builder.Property(w => w.Username)
                 .IsRequired()
                 .HasMaxLength(250);
+            
+            builder.Property(w => w.ProfileImageUrl)
+                .IsRequired()
+                .HasMaxLength(250); 
 
             builder.HasIndex(w => w.HasPublicProfile);
+
+            builder.HasIndex(w => w.IsActive);
         }
     }
 }

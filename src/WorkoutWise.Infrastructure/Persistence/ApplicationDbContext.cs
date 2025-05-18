@@ -14,10 +14,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using WorkoutWise.Domain.Aggregates.Workouts.Entities;
 using WorkoutWise.Domain.Aggregates.WorkoutPlan.Entities;
 using WorkoutWise.Domain.Aggregates.UserAcount.Entities;
+using WorkoutWise.Domain.Common.Results;
 
 namespace WorkoutWise.Infrastructure.Persistence
 {
-    public class ApplicationDbContext: DbContext, IApplicationDbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -29,7 +30,7 @@ namespace WorkoutWise.Infrastructure.Persistence
         public DbSet<Workout> workouts { get; set; }
         public DbSet<WorkoutExercise> workoutsExercise { get; set; }
         public DbSet<ExerciseSet> workoutsSet { get; set; }
-        public DbSet<User> users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -72,6 +73,16 @@ namespace WorkoutWise.Infrastructure.Persistence
         public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
             return await Database.BeginTransactionAsync(cancellationToken);
+        }
+
+        public async Task<ResultT<T>> ExecuteTransactionAsync<T>(Func<Task<T>> operation, CancellationToken cancellationToken = default, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        {
+            return await this.ExecuteTransactionAsync(operation, cancellationToken, isolationLevel);
+        }
+
+        public async Task<ResultT<T>> ExecuteTransactionAsync<T>(Func<Task<ResultT<T>>> operation, CancellationToken cancellationToken = default, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        {
+            return await this.ExecuteTransactionAsync(operation, cancellationToken, isolationLevel);
         }
     }
 }

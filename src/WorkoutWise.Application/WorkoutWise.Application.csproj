@@ -14,4 +14,8 @@
     <ProjectReference Include="..\WorkoutWise.Domain\WorkoutWise.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\UserAccounts\Queries\" />
+  </ItemGroup>
+
 </Project>

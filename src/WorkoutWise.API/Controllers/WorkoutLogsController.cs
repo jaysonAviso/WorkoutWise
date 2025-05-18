@@ -6,6 +6,8 @@ using WorkoutWise.Domain.Aggregates.ValueObjects;
 
 namespace WorkoutWise.API.Controllers;
 
+[ApiController]
+[Route("WorkoutLogs")]
 public class WorkoutLogsController : ControllerBase
 {
     private readonly IMediator _mediator;

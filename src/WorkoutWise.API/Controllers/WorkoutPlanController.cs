@@ -7,7 +7,9 @@ using WorkoutWise.Domain.Aggregates.ValueObjects;
 
 namespace WorkoutWise.API.Controllers
 {
-    public class WorkoutPlanController : Controller
+    [ApiController]
+    [Route("WorkoutPlan")]
+    public class WorkoutPlanController : ControllerBase
     {
         private readonly IMediator _mediator;
 

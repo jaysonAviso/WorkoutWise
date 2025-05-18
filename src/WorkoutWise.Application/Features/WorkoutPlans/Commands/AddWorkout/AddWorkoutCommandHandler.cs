@@ -18,9 +18,7 @@ namespace WorkoutWise.Application.Features.WorkoutPlans.Commands.AddWorkout
 
         public async Task<ResultT<WorkoutId>> Handle(AddWorkoutCommand request, CancellationToken cancellationToken)
         {
-            using var transaction = await _context.BeginTransactionAsync(cancellationToken);
-
-            try
+            return await _context.ExecuteTransactionAsync(async () => 
             {
                 var plan = await _context.WorkoutPlans
                     .FirstOrDefaultAsync(wp => wp.Id == request.WorkoutPlanId, cancellationToken);
@@ -65,18 +63,9 @@ namespace WorkoutWise.Application.Features.WorkoutPlans.Commands.AddWorkout
 
                 });
 
-                await _context.SaveChangesAsync(cancellationToken);
-
-                await transaction.CommitAsync(cancellationToken);
-
                 return ResultT<WorkoutId>.Success(workout.Value!.Id);
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync(cancellationToken);
 
-                return ResultT<WorkoutId>.Failure(ex.Message);
-            }
+            } , cancellationToken);
         }
     }
 }

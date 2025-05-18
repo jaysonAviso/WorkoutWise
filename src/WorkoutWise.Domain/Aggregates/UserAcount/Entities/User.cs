@@ -13,16 +13,18 @@ namespace WorkoutWise.Domain.Aggregates.UserAcount.Entities
 {
     public sealed class User : Entity<UserId> , IAggregateRoot
     {
+        public string Username { get; private set; }
+        public string Password { get; private set; }
+        public string? ProfileImageUrl { get; private set; }
         public string FirstName { get; private set; }
         public string MiddleName { get; private set; }
         public string LastName { get; private set; }
-        public string Username { get; private set; }
-        public string Password { get; private set; }
         public bool HasPublicProfile { get; private set; }
+        public bool IsActive { get; set; }
 
         private User() { }
 
-        public static ResultT<User> Create(string firstname, string lastname, string middlename, string username, string password)
+        public static ResultT<User> Create(string username, string? profileImageUrl, string password, string firstname, string lastname, string middlename)
         {
             if (string.IsNullOrWhiteSpace(firstname))
                 return UserErrors.UsernameIsRequired;
@@ -36,13 +38,18 @@ namespace WorkoutWise.Domain.Aggregates.UserAcount.Entities
             return ResultT<User>.Success(new User
             {
                 Id = UserId.New(),
+                Username = username,
+                Password = password,
+                ProfileImageUrl = profileImageUrl,
                 FirstName = firstname,
                 LastName = lastname,
                 MiddleName = middlename,
-                Username = username,
-                Password = password,
                 HasPublicProfile = true
             });
         }
+
+        public void SetProfileVisibility(bool isPublic) => HasPublicProfile = isPublic;
+
+        public void Deactivate() => IsActive = false;
     }
 }

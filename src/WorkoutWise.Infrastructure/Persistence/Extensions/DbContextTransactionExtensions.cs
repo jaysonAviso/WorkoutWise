@@ -7,27 +7,71 @@ using System.Threading.Tasks.Dataflow;
 using WorkoutWise.Application.Interfaces;
 using System.Diagnostics;
 using WorkoutWise.Domain.Common.Results;
+using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace WorkoutWise.Infrastructure.Persistence.Extensions
 {
     public static class DbContextTransactionExtensions
     {
 
-        public static async Task<Result> ExecuteTransactionAsync(this ApplicationDbContext dbContext, Func<Task> operation, CancellationToken cancellationToken = default)
+        public static async Task<ResultT<T>> ExecuteTransactionAsync<T>(
+            this ApplicationDbContext dbContext, 
+            Func<Task<T>> operation, 
+            CancellationToken cancellationToken = default, 
+            IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
-            await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+            if (dbContext is not ApplicationDbContext concreteContext)
+                return ResultT<T>.Failure("ExecuteTransactionAsync requires the concrete ApplicationDbContext.");
+
+            await using var transaction = await concreteContext.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
 
             try
             {
-                await operation();
+                var result = await operation();
+
                 await dbContext.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);
-                return Result.Success();
+
+                return ResultT<T>.Success(result);
             }
             catch (Exception ex)
             {
                 await transaction.RollbackAsync(cancellationToken);
-                return Result.Failure($"Transaction Failed: {ex.Message}");
+                return ResultT<T>.Failure($"Transaction Failed: {ex.Message}");
+            }
+        }
+
+        public static async Task<ResultT<T>> ExecuteTransactionAsync<T>(
+            this ApplicationDbContext dbContext,
+            Func<Task<ResultT<T>>> operation,
+            CancellationToken cancellationToken = default,
+            IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        {
+            if (dbContext is not ApplicationDbContext concreteContext)
+                return ResultT<T>.Failure("ExecuteTransactionAsync requires the concrete ApplicationDbContext.");
+
+            await using var transaction = await concreteContext.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
+
+            try
+            {
+                var result = await operation();
+
+                if (result.IsFailure)
+                {
+                    await transaction.RollbackAsync(cancellationToken);
+                    return result;
+                }
+
+                await concreteContext.SaveChangesAsync(cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                return ResultT<T>.Failure($"Transaction Failed: {ex.Message}");
             }
         }
     }

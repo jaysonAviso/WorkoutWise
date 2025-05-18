@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using WorkoutWise.Domain.Aggregates.UserAcount.Entities;
 using WorkoutWise.Domain.Aggregates.WorkoutPlan.Entities;
 using WorkoutWise.Domain.Aggregates.Workouts.Entities;
+using WorkoutWise.Domain.Common.Results;
 
 namespace WorkoutWise.Application.Interfaces
 {
@@ -20,11 +21,19 @@ namespace WorkoutWise.Application.Interfaces
         DbSet<ExerciseSet> workoutsSet { get; set; }
         DbSet<WorkoutLog> Workouts { get; set; }
         DbSet<WorkoutExerciseLog> WorkoutDetails { get; set; }
-        DbSet<User> users { get; set; }
+        DbSet<User> Users { get; set; }
 
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
-        Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
+        Task<ResultT<T>> ExecuteTransactionAsync<T>(
+        Func<Task<T>> operation,
+        CancellationToken cancellationToken = default,
+        IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
+
+        Task<ResultT<T>> ExecuteTransactionAsync<T>(
+            Func<Task<ResultT<T>>> operation,
+            CancellationToken cancellationToken = default,
+            IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
     }
 }
