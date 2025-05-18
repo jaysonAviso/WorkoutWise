@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using WorkoutWise.Application.DTOs;
 using WorkoutWise.Application.Interfaces;
 
-namespace WorkoutWise.Application.Features.WorkoutPlans.Queries
+namespace WorkoutWise.Application.Features.WorkoutPlans.Queries.GetWorkoutPlanById
 {
     internal sealed class GetWorkoutPlanHandler : IRequestHandler<GetWorkoutPlanQuery, WorkoutPlanDto?>
     {

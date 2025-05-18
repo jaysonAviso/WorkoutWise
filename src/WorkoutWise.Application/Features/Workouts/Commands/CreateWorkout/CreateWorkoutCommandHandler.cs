@@ -4,7 +4,7 @@ using WorkoutWise.Domain.Aggregates.ValueObjects;
 using WorkoutWise.Domain.Aggregates.Workouts.Entities;
 using WorkoutWise.Domain.Common.Results;
 
-namespace WorkoutWise.Application.Features.Workouts.Commands;
+namespace WorkoutWise.Application.Features.Workouts.Commands.CreateWorkout;
 
 internal sealed class CreateWorkoutCommandHandler: IRequestHandler<CreateWorkoutCommand, ResultT<WorkoutLogId>>
 {
@@ -16,7 +16,7 @@ internal sealed class CreateWorkoutCommandHandler: IRequestHandler<CreateWorkout
 
     public async Task<ResultT<WorkoutLogId>> Handle(CreateWorkoutCommand request, CancellationToken cancellationToken)
     {
-        return await _context.ExecuteTransactionAsync(async () => 
+        return await _context.BeginTransactionAsync(async () => 
         {
             var workout = WorkoutLog.Create(
             request.UserId,

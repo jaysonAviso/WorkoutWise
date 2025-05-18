@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WorkoutWise.Application.Features.Workouts.Commands;
+using WorkoutWise.Application.Features.Workouts.Commands.CreateWorkout;
 using WorkoutWise.Application.Features.Workouts.Queries.GetWorkoutLogById;
 using WorkoutWise.Domain.Aggregates.ValueObjects;
 

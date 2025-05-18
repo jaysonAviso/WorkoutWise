@@ -20,6 +20,13 @@ namespace WorkoutWise.Infrastructure.Persistence.Configurations
                 .HasConversion(workoutPlan => workoutPlan.Value, value => new WorkoutPlanId(value))
                 .ValueGeneratedNever();
 
+            builder.Property(e => e.UserId)
+                .IsRequired()
+                .HasConversion(
+                    id => id.Value,
+                    value => new UserId(value)
+                );
+
             builder.Property(wp => wp.Name)
                 .IsRequired()
                 .HasMaxLength(250);

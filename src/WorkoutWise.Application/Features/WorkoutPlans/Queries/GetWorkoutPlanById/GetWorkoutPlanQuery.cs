@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 using WorkoutWise.Application.DTOs;
 using WorkoutWise.Domain.Aggregates.ValueObjects;
 
-namespace WorkoutWise.Application.Features.WorkoutPlans.Queries;
+namespace WorkoutWise.Application.Features.WorkoutPlans.Queries.GetWorkoutPlanById;
 
-public record GetWorkoutPlanQuery(WorkoutPlanId WorkoutPlanId) : IRequest<WorkoutPlanDto>
-{
-
-}
+public sealed record GetWorkoutPlanQuery(WorkoutPlanId WorkoutPlanId) : IRequest<WorkoutPlanDto>;

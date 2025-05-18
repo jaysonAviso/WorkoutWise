@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WorkoutWise.Application;
+using WorkoutWise.Application.Features.UserAccounts.Commands.AddUser;
 using WorkoutWise.Infrastructure;
 using WorkoutWise.Infrastructure.Persistence;
 
@@ -12,7 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<ApplicationDbContext>(
-    opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+            .EnableSensitiveDataLogging()
+            .LogTo(Console.WriteLine, LogLevel.Information));
 
 builder.Services
     .AddApplication()

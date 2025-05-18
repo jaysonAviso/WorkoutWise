@@ -15,6 +15,7 @@ using WorkoutWise.Domain.Aggregates.Workouts.Entities;
 using WorkoutWise.Domain.Aggregates.WorkoutPlan.Entities;
 using WorkoutWise.Domain.Aggregates.UserAcount.Entities;
 using WorkoutWise.Domain.Common.Results;
+using WorkoutWise.Infrastructure.Persistence.Extensions;
 
 namespace WorkoutWise.Infrastructure.Persistence
 {
@@ -70,17 +71,24 @@ namespace WorkoutWise.Infrastructure.Persistence
             }
         }
 
-        public async Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+        public async Task<IDbContextTransaction> BeginTransactionAsync(
+            CancellationToken cancellationToken = default)
         {
             return await Database.BeginTransactionAsync(cancellationToken);
         }
 
-        public async Task<ResultT<T>> ExecuteTransactionAsync<T>(Func<Task<T>> operation, CancellationToken cancellationToken = default, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        public async Task<ResultT<T>> BeginTransactionAsync<T>(
+            Func<Task<T>> operation, 
+            CancellationToken cancellationToken = default, 
+            IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             return await this.ExecuteTransactionAsync(operation, cancellationToken, isolationLevel);
         }
 
-        public async Task<ResultT<T>> ExecuteTransactionAsync<T>(Func<Task<ResultT<T>>> operation, CancellationToken cancellationToken = default, IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        public async Task<ResultT<T>> BeginTransactionAsync<T>(
+            Func<Task<ResultT<T>>> operation, 
+            CancellationToken cancellationToken = default, 
+            IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
         {
             return await this.ExecuteTransactionAsync(operation, cancellationToken, isolationLevel);
         }

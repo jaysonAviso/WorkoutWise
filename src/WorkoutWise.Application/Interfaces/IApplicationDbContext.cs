@@ -26,14 +26,14 @@ namespace WorkoutWise.Application.Interfaces
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
-        Task<ResultT<T>> ExecuteTransactionAsync<T>(
-        Func<Task<T>> operation,
-        CancellationToken cancellationToken = default,
-        IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
+        Task<ResultT<T>> BeginTransactionAsync<T>(
+            Func<Task<T>> operation, 
+            CancellationToken cancellationToken = default, 
+            IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
 
-        Task<ResultT<T>> ExecuteTransactionAsync<T>(
-            Func<Task<ResultT<T>>> operation,
-            CancellationToken cancellationToken = default,
+        Task<ResultT<T>> BeginTransactionAsync<T>(
+            Func<Task<ResultT<T>>> operation, 
+            CancellationToken cancellationToken = default, 
             IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
     }
 }

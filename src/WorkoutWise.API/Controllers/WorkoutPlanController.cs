@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutWise.Application.Features.WorkoutPlans.Commands.CreateWorkoutPlan;
 using WorkoutWise.Application.Features.WorkoutPlans.Queries;
+using WorkoutWise.Application.Features.WorkoutPlans.Queries.GetWorkoutPlanById;
 using WorkoutWise.Domain.Aggregates.ValueObjects;
 
 namespace WorkoutWise.API.Controllers

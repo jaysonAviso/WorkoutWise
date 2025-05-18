@@ -14,7 +14,6 @@ namespace WorkoutWise.Infrastructure.Persistence.Extensions
 {
     public static class DbContextTransactionExtensions
     {
-
         public static async Task<ResultT<T>> ExecuteTransactionAsync<T>(
             this ApplicationDbContext dbContext, 
             Func<Task<T>> operation, 

@@ -32,6 +32,6 @@ public sealed class ExerciseSetLog : Entity<ExerciseSetLogId>
         if (weight < 0)
             return WorkoutSetErrors.WeightConnotBeNegative;
 
-        return ResultT<ExerciseSetLog>.Success(new ExerciseSetLog() { WorkoutExerciseLogId = workoutExerciseLogId, SetNumber = setNumber, Reps = reps, Weight = weight, Unit = unit });
+        return ResultT<ExerciseSetLog>.Success(new ExerciseSetLog{ Id = ExerciseSetLogId.New(), WorkoutExerciseLogId = workoutExerciseLogId, SetNumber = setNumber, Reps = reps, Weight = weight, Unit = unit });
     }
 }

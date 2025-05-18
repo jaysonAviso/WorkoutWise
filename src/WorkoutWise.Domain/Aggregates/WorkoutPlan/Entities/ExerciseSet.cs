@@ -26,7 +26,7 @@ namespace WorkoutWise.Domain.Aggregates.WorkoutPlan.Entities
             if (weight < 0)
                 return WorkoutSetErrors.WeightConnotBeNegative;
 
-            return ResultT<ExerciseSet>.Success(new ExerciseSet() { WorkoutExerciseId = workoutExerciseId, SetNumber = setNumber, Reps = reps, Weight = weight, Unit = unit });
+            return ResultT<ExerciseSet>.Success(new ExerciseSet() { Id = ExerciseSetId.New(), WorkoutExerciseId = workoutExerciseId, SetNumber = setNumber, Reps = reps, Weight = weight, Unit = unit });
         }
     }
 }

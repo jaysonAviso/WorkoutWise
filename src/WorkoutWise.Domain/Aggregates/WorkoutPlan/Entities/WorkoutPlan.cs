@@ -27,7 +27,7 @@ namespace WorkoutWise.Domain.Aggregates.WorkoutPlan.Entities
             if (string.IsNullOrWhiteSpace(name))
                 return WorkoutPlanErrors.NameIsRequired;
 
-            return ResultT<WorkoutPlan>.Success(new WorkoutPlan { Name = name, UserId = userId, RestDaysPerWeek = restDayPerWeek });
+            return ResultT<WorkoutPlan>.Success(new WorkoutPlan {Id = WorkoutPlanId.New(), Name = name, UserId = userId, RestDaysPerWeek = restDayPerWeek });
         }
 
         public static ResultT<Workout> CreateWorkout(string name, WorkoutPlanId workoutPlanId, DayOfWeek dayOfWeek) => Workout.Create(name, workoutPlanId, dayOfWeek);

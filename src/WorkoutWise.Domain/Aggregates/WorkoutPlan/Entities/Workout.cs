@@ -22,7 +22,7 @@ namespace WorkoutWise.Domain.Aggregates.WorkoutPlan.Entities
             if (string.IsNullOrWhiteSpace(name))
                 return WorkoutErrors.RequiredName;
 
-            return ResultT<Workout>.Success(new Workout() { Name = name, WorkoutPlanId = workoutPlanId, DayOfWeek = dayOfWeek });
+            return ResultT<Workout>.Success(new Workout() {Id = WorkoutId.New(), Name = name, WorkoutPlanId = workoutPlanId, DayOfWeek = dayOfWeek });
         }
 
         internal Result AddExercise(WorkoutExercise workoutExercise)

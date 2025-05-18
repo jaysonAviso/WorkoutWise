@@ -18,7 +18,7 @@ namespace WorkoutWise.Domain.Aggregates.WorkoutPlan.Entities
 
         internal static ResultT<WorkoutExercise> Create(string name, WorkoutId workoutId, string notes)
         {
-            return ResultT<WorkoutExercise>.Success(new WorkoutExercise { Name = name, WorkoutId = workoutId, Notes = notes });
+            return ResultT<WorkoutExercise>.Success(new WorkoutExercise {Id = WorkoutExerciseId.New(), Name = name, WorkoutId = workoutId, Notes = notes });
         }
 
         internal Result AddSet(ExerciseSet workoutSet)

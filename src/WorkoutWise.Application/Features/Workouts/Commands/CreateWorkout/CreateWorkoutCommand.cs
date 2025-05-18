@@ -9,7 +9,7 @@ using WorkoutWise.Application.Features.WorkoutPlans.Commands.AddWorkout;
 using WorkoutWise.Domain.Aggregates.ValueObjects;
 using WorkoutWise.Domain.Common.Results;
 
-namespace WorkoutWise.Application.Features.Workouts.Commands;
+namespace WorkoutWise.Application.Features.Workouts.Commands.CreateWorkout;
 
 public record CreateWorkoutCommand(
     string Name,

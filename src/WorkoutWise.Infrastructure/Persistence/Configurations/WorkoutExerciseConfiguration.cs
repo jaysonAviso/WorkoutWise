@@ -20,6 +20,13 @@ namespace WorkoutWise.Infrastructure.Persistence.Configurations
                 .HasConversion(we => we.Value, value => new WorkoutExerciseId(value))
                 .ValueGeneratedNever();
 
+            builder.Property(e => e.WorkoutId)
+            .IsRequired()
+            .HasConversion(
+                id => id.Value,
+                value => new WorkoutId(value)
+            );
+
             builder.Property(we => we.Name)
                 .IsRequired();
 

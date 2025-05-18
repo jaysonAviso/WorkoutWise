@@ -18,7 +18,7 @@ namespace WorkoutWise.Application.Features.WorkoutPlans.Commands.AddWorkout
 
         public async Task<ResultT<WorkoutId>> Handle(AddWorkoutCommand request, CancellationToken cancellationToken)
         {
-            return await _context.ExecuteTransactionAsync(async () => 
+            return await _context.BeginTransactionAsync(async () => 
             {
                 var plan = await _context.WorkoutPlans
                     .FirstOrDefaultAsync(wp => wp.Id == request.WorkoutPlanId, cancellationToken);

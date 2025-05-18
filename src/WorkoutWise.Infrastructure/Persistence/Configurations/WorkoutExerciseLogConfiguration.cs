@@ -16,9 +16,11 @@ internal class WorkoutExerciseLogConfiguration : IEntityTypeConfiguration<Workou
     {
         builder.HasKey(d => d.Id);
 
-        builder.Property(d => d.Id)
-            .HasConversion(workoutDetail => workoutDetail.Value, value => new WorkoutExerciseLogId(value))
-            .ValueGeneratedNever();
+        builder.Property(e => e.Id)
+                .HasConversion(
+                    id => id.Value,
+                    value => new WorkoutExerciseLogId(value)
+                ).ValueGeneratedNever();
 
         builder.Property(d => d.WorkoutId)
             .HasConversion(workout => workout.Value, value => new WorkoutLogId(value));
@@ -34,6 +36,7 @@ internal class WorkoutExerciseLogConfiguration : IEntityTypeConfiguration<Workou
             .WithMany()
             .HasForeignKey(workout => workout.WorkoutId);
 
+        
         builder.Property(d => d.IsDeleted)
             .HasDefaultValue(false);
 

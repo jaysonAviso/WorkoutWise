@@ -21,6 +21,20 @@ internal class WorkoutLogConfiguration : IEntityTypeConfiguration<WorkoutLog>
             .HasConversion(workout => workout.Value, value => new WorkoutLogId(value))
             .ValueGeneratedNever();
 
+        builder.Property(e => e.UserId)
+            .IsRequired()
+            .HasConversion(
+                id => id.Value,
+                value => new UserId(value)
+            );
+
+        builder.Property(e => e.WorkoutPlanId)
+            .IsRequired()
+            .HasConversion(
+                id => id.Value,
+                value => new WorkoutPlanId(value)
+            );
+
         builder.Property(w => w.Name)
             .IsRequired()
             .HasMaxLength(250);
