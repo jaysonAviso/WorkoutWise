@@ -6,7 +6,7 @@ using WorkoutWise.Application.Features.WorkoutPlans.Queries;
 using WorkoutWise.Application.Features.WorkoutPlans.Queries.GetWorkoutPlanById;
 using WorkoutWise.Domain.Aggregates.ValueObjects;
 
-namespace WorkoutWise.API.Controllers
+namespace WorkoutWise.API.Controllers.WorkoutPlans
 {
     [ApiController]
     [Route("WorkoutPlan")]
@@ -25,12 +25,15 @@ namespace WorkoutWise.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var workoutPlanId = await _mediator.Send(command);
+            var result = await _mediator.Send(command);
+
+            if (result.IsFailure)
+                return BadRequest(result.ErrorMesage!);
 
             return CreatedAtRoute(
                 routeName: "GetWorkoutPlanById",
-                routeValues: new { workoutPlanId },
-                value: workoutPlanId
+                routeValues: new { result.Value },
+                value: result.Value!
             );
         }
 

@@ -4,7 +4,7 @@ using WorkoutWise.Application.Features.Workouts.Commands.CreateWorkout;
 using WorkoutWise.Application.Features.Workouts.Queries.GetWorkoutLogById;
 using WorkoutWise.Domain.Aggregates.ValueObjects;
 
-namespace WorkoutWise.API.Controllers;
+namespace WorkoutWise.API.Controllers.WorkoutLogs;
 
 [ApiController]
 [Route("WorkoutLogs")]
@@ -23,12 +23,16 @@ public class WorkoutLogsController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var workoutLogId = await _mediator.Send(command);
+        var result = await _mediator.Send(command);
+
+        if (result.IsFailure)
+            return BadRequest(result.ErrorMesage!);
 
         return CreatedAtRoute(
             routeName: "GetWorkoutLogById",
-            routeValues: new { id = workoutLogId }, 
-            value: workoutLogId);
+            routeValues: new { id = result.Value! }, 
+            value: result.Value!
+        );
     }
 
     [HttpGet("{id:guid}", Name = "GetWorkoutLogById")]

@@ -50,6 +50,6 @@ namespace WorkoutWise.Domain.Aggregates.UserAcount.Entities
 
         public void SetProfileVisibility(bool isPublic) => HasPublicProfile = isPublic;
 
-        public void Deactivate() => IsActive = false;
+        public void DeactivateUser() => IsActive = false;
     }
 }

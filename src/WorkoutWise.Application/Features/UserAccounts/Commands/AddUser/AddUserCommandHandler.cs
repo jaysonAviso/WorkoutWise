@@ -20,8 +20,8 @@ namespace WorkoutWise.Application.Features.UserAccounts.Commands.AddUser
 
         public async Task<ResultT<UserId>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
-            return await _context.BeginTransactionAsync(async () =>
-            {
+            //return await _context.BeginTransactionAsync(async () =>
+            //{
                 var user = User.Create(
                     request.Username,
                     request.Password,
@@ -40,7 +40,7 @@ namespace WorkoutWise.Application.Features.UserAccounts.Commands.AddUser
 
             return ResultT<UserId>.Success(user.Value!.Id);
 
-            }, cancellationToken);
+            //}, cancellationToken);
         }
     }
 }
