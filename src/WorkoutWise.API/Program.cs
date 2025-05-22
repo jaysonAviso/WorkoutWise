@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WorkoutWise.API.Middlewares;
 using WorkoutWise.Application;
 using WorkoutWise.Application.Features.UserAccounts.Commands.AddUser;
 using WorkoutWise.Infrastructure;
@@ -31,6 +32,8 @@ builder.Services
     .AddApplication()
     .AddInfrastructure();
 
+builder.Services.AddSingleton<GlobalExceptionHandlingMiddleware>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,6 +45,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.MapControllers();
 

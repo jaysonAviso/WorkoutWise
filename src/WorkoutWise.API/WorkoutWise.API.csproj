@@ -17,4 +17,8 @@
     <ProjectReference Include="..\WorkoutWise.Infrastructure\WorkoutWise.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>
